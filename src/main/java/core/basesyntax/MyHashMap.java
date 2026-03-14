@@ -71,8 +71,8 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
         threshold = newThr;
         Node<K, V>[] newTab = (Node<K, V>[]) new Node[newCap];
 
-        for (int j = 0; j < oldCap; ++j) {
-            Node<K, V> element = oldTab[j];
+        for (int bucketIndex = 0; bucketIndex < oldCap; ++bucketIndex) {
+            Node<K, V> element = oldTab[bucketIndex];
 
             while (element != null) {
                 Node<K, V> next = element.next;
@@ -82,7 +82,7 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
                 element = next;
 
             }
-            oldTab[j] = null;
+            oldTab[bucketIndex] = null;
         }
         table = newTab;
         return table;
@@ -94,7 +94,7 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
         private V value;
         private Node<K, V> next;
 
-        Node(int hash, K key, V value, Node<K, V> next) {
+        private Node(int hash, K key, V value, Node<K, V> next) {
             this.hash = hash;
             this.key = key;
             this.value = value;
@@ -145,8 +145,8 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
         return null;
     }
 
-    static final int hash(Object key) {
-        int h;
-        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+    private static final int hash(Object key) {
+        int hashCode;
+        return (key == null) ? 0 : (hashCode = key.hashCode()) ^ (hashCode >>> 16);
     }
 }
