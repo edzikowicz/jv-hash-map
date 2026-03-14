@@ -94,7 +94,7 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
         private V value;
         private Node<K, V> next;
 
-        private Node(int hash, K key, V value, Node<K, V> next) {
+        Node(int hash, K key, V value, Node<K, V> next) {
             this.hash = hash;
             this.key = key;
             this.value = value;
@@ -145,7 +145,7 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
         return null;
     }
 
-    private static final int hash(Object key) {
+    static final int hash(Object key) {
         int hashCode;
         return (key == null) ? 0 : (hashCode = key.hashCode()) ^ (hashCode >>> 16);
     }
